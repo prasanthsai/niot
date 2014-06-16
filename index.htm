@@ -1,0 +1,373 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>-->
+<title>NIOT</title>
+
+<link rel="stylesheet" href="css/avgrund.css">
+<style type="text/css">
+
+
+@font-face {
+	font-family: weblysleek_ui_lite;
+	src: url('fonts/weblysleekuil.ttf');
+}
+
+@font-face {
+	font-family: weblysleek_ui_s_lite;
+	src: url('fonts/weblysleekuisl.ttf');
+}
+
+@font-face {
+	font-family: weblysleek_ui_s_bold;
+	src: url('fonts/weblysleekuisb.ttf');
+}
+
+
+	a:link {text-decoration:none; color:#fff; text-align:center;}
+	a:visited {text-decoration:none; color:#fff;} /* visited link */
+	a:hover {text-decoration:none; color:#8b8f93;}   /* mouse over link */
+	a:active {text-decoration:none; color:#fff;}  /* selected link */
+	
+	tr:link {text-decoration:none; color:#8b8f93;  text-align:center;}
+	tr:visited {text-decoration:none; color:#8b8f93;} /* visited link */
+	tr:hover {text-decoration:none; color:#fff;}   /* mouse over link */
+	tr:active {text-decoration:none; color:#8b8f93;}  /* selected link */
+
+
+
+
+body {
+	background-color: #262627;
+    font-family: weblysleek_ui_s_lite;
+    font-size: 15px;
+    font-style: normal;
+    letter-spacing: 1.8px;
+	line-height:170%;
+	color:#8b8f93;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+
+.navigation {
+	background-color: #060606;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 90px;
+	height: 100%;
+}
+
+.nav {
+	background-color: #010101;
+	position: fixed;
+	left: 0px;
+	width: 90px;
+	height: 80px;
+}
+	.forecast{
+		top:45px;
+		opacity:0.56;
+	}
+	.reports{
+		top:125px;
+		opacity:0.56;
+	}
+	.projects{
+		top:205px;
+		opacity:0.56;
+	}
+	.services{
+		top:285px;
+		opacity:0.56;
+	}
+	.contact{
+		top:365px;
+		opacity:0.56;
+	}
+	.people{
+		top:445px;
+		opacity:0.56;
+	}
+	
+.SubNav {
+	position:fixed;
+	background-color: #161617;
+	top: 0%;
+	left:-100px;
+	height:100%;
+	width:190px;
+}
+
+
+.SubNavHeader{
+	postion:fixed;
+	background-color: #1d1d1d;
+	top: 0%;
+	height:45px;
+	width:190px;
+	font-family: weblysleek_ui_s_lite;
+    font-size: 24px;
+    font-style: normal;
+    letter-spacing: 1.4px;
+	line-height:40px;
+}
+
+	
+
+.content {
+	position: absolute;
+	top:0px;
+	left: 90px;
+	right:0px;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+
+.header {
+	background-color: #1a1a1a;
+	position: absolute;
+	top:0%;
+	left: 0%;
+	width:100%;
+	height: 45px;
+    font-family: weblysleek_ui_s_lite;
+    font-size: 24px;
+    font-style: normal;
+    letter-spacing: 1.4px;
+	line-height:40px;
+}
+#main {
+	position: absolute;
+	top: 20%;
+	left: 5%;
+	width: 90%;
+	min-height: 80%;
+}
+#imgalign{
+	top:50%;
+	left:50%;
+	width:10%;
+	position:fixed;
+	opacity:0;
+}
+
+
+</style>
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="js/jquery.avgrund.js"></script>
+
+
+<script type="text/javascript">
+
+	function NavMOver(elem) {
+		$(".nav."+elem).animate({opacity: 0}, {duration:300,easing:'easeInQuint'} );
+	}
+	
+	function NavMOut(elem) {
+		$(".nav."+elem).animate({opacity: 0.56}, {duration:300,easing:'easeOutQuint'} );
+	}
+	
+	function SubNavUnHide(ElemClass) {
+		$("#"+ElemClass).animate({left: 90}, {duration:300,easing:'easeOutQuint'} );
+		$(".content").animate({left: 270}, {duration:300,easing:'easeOutQuint'} );
+		/*$(".content").animate({right: -180}, {duration:300,easing:'easeOutQuint'} );*/
+		
+	}
+	
+	function SubNavHide(ElemClass) {
+		$("#"+ElemClass).animate({left: -100}, {duration:300,easing:'easeOutQuint'} );
+		$(".content").animate({left: 90}, {duration:300,easing:'easeOutQuint'} );
+		/*$(".content").animate({right: 0}, {duration:300,easing:'easeOutQuint'} );*/
+		
+	}
+		
+	function ajhome(tlink){
+			
+		$("#main").fadeOut(1000, function(){
+			$("#imgalign").animate({opacity: 1},300,function(){
+				$("#main").load(tlink,function(){ $("#main").fadeIn(1000); $("#imgalign").animate({opacity: 0},300,function(){
+					$('#main').animate({opacity: 1}, 500);
+				} ); });
+			} );
+		});
+	}
+	
+	function showWidthWindow() {
+		return $(window).width();
+	}
+	
+	function setWidth(){
+		var widx = $(window).width();
+		if ( widx ) {
+			widx = widx-90;
+			$('.content').css('right', 'auto').css('width',widx+'px');
+		}
+		var hty = $(window).height();
+		if ( hty ) {
+			$('.content').css('min-height',hty+'px');
+		}
+	}
+	
+	function iconHover(ElemCls){
+		if ( ElemCls == 'icon1' ){
+			$('#'+ElemCls+'-img').stop();
+			$('#Subicon1').stop();
+			$('#'+ElemCls+'-img').fadeOut( 200, function(){
+				$('#Subicon1').fadeIn(200, function() {
+					$('#'+ElemCls+'-img').stop();
+					$('#Subicon1').stop();
+				});
+			});
+		}
+		else{
+			$('#'+ElemCls+'-img').stop();
+			$('#'+ElemCls+'-img').animate( {opacity: 1}, {duration:300,easing:'easeOutQuint'} );
+		}
+	}
+	
+	function iconHoverOut(ElemCls){
+		if ( ElemCls == 'icon1' ){
+			$('#Subicon1').stop();
+			$('#Subicon1').fadeOut( 200, function(){
+				$('#'+ElemCls+'-img').fadeIn(200, function() {
+					/*$('#'+ElemCls+'-img').stop();*/
+					$('#Subicon1').stop();
+				});
+			});
+		}
+		else{
+			$('#'+ElemCls+'-img').stop();
+			$('#'+ElemCls+'-img').animate( {opacity: 0.56}, {duration:300,easing:'easeOutQuint'} );
+		}
+	}
+	
+	/*function GetActiveElement()	{
+		var activeElem = 'false';
+		if( $(".content").css('left') == '90px' ) return 0;
+		else if ( $("#forecast").css('left') == '270px' ) activeElem = 'forecast';
+	}*/
+	
+	$(function() {
+		$('#show').avgrund({
+			height: 200,
+			holderClass: 'custom',
+			showClose: true,
+			showCloseText: 'Close',
+			enableStackAnimation: true,
+			onBlurContainer: '.container',
+			template:
+					'<div class="icon1" id="Subicon1" style="display:none;">'+
+							'<table style="width: 100%;>'+
+								'<tr onclick="ajhome(\'circulation.php\',1);"><td height=\'30\'><center> Circulation forecast</center></td></tr>'+
+								'<tr onclick="ajhome(\'wave.php\',1);"><td height=\'30\'><center> Wave forecast</center></td></tr>'+
+								'<tr onclick="ajhome(\'wind.php\',1);"><td height=\'30\'><center> Wind forecast</center></td></tr>'+
+							'</table>'+
+					'</div>'+
+					'<div class="icon1" onmouseover="iconHover(\'icon1\')" onmouseout="iconHoverOut(\'icon1\')" >'+
+						'<img id="icon1-img" class="displayed" src="img/icon1.png" height="75%" >'+
+						'<div style="position:absolute; top:75%; width:100%;"><center>Forecast</center></div>'+
+					'</div>'+
+					'<div class="icon2" onmouseover="iconHover(\'icon2\')" onmouseout="iconHoverOut(\'icon2\')" onclick="ajhome(\'reports.php\',1);" >'+
+						'<img id="icon2-img" class="displayed" src="img/icon2.png" height="75%" >'+
+						'<center>Reports</center>'+
+					'</div>'+
+					'<div class="icon3" onmouseover="iconHover(\'icon3\')" onmouseout="iconHoverOut(\'icon3\')" >'+
+						'<img id="icon3-img" class="displayed" src="img/icon3.png" height="75%" >'+
+						'<center>Products</center>'+
+					'</div>'+
+					'<div class="icon4" onmouseover="iconHover(\'icon4\')" onmouseout="iconHoverOut(\'icon4\')" >'+
+						'<img id="icon4-img" class="displayed" src="img/icon4.png" height="75%" >'+
+						'<center>Services</center>'+
+					'</div>'+
+					'<div class="icon5" onmouseover="iconHover(\'icon5\')" onmouseout="iconHoverOut(\'icon5\')" >'+
+						'<img id="icon5-img" class="displayed" src="img/icon5.png" height="75%" >'+
+						'<center>Contact Us</center>'+
+					'</div>'+
+					'<div class="icon6" onmouseover="iconHover(\'icon6\')" onmouseout="iconHoverOut(\'icon6\')" >'+
+						'<img id="icon6-img" class="displayed" src="img/icon6.png" height="75%" >'+
+						'<center>People</center>'+
+					'</div>'
+						
+		});
+	});
+
+	
+	$(document).ready(function(){
+		$(".SubNav").mouseleave( function() { 
+			SubNavHide('forecast');
+		});
+		$(".reports").mouseover( function() { 
+			SubNavHide('forecast');
+		});
+		
+		setWidth();
+	});
+
+
+</script>
+
+</head>
+
+<body class="avgrund-ready" data-twttr-rendered="true">
+	<div class="container avgrund-blur">
+
+<div class='content'>
+<div class='header'> &nbsp; &nbsp; &nbsp; Kalpasar Forecast System </div>
+<div id='main'>
+	<center>
+		<p style="font-size: 26px;" >Kalpasar Forecast System<p>
+		Kalpasar Development Project involves construction of a dam across the Gulf to create a fresh water reservoir by storing the waters from the rivers Narmada, Mahi, Sabarmati, Dhadar and other runoff streams.
+		<br><br>Kalpasar Development Project involves construction of a dam across the Gulf to create a fresh water reservoir by storing the waters from the rivers Narmada, Mahi, Sabarmati, Dhadar and other runoff streams.
+		<br><br>Kalpasar Development Project involves construction of a dam across the Gulf to create a fresh water reservoir by storing the waters from the rivers Narmada, Mahi, Sabarmati, Dhadar and other runoff streams.
+		<br><br>Kalpasar Development Project involves construction of a dam across the Gulf to create a fresh water reservoir by storing the waters from the rivers Narmada, Mahi, Sabarmati, Dhadar and other runoff streams.
+		<br><br>Kalpasar Development Project involves construction of a dam across the Gulf to create a fresh water reservoir by storing the waters from the rivers Narmada, Mahi, Sabarmati, Dhadar and other runoff streams.
+		<br><br>Kalpasar Development Project involves construction of a dam across the Gulf to create a fresh water reservoir by storing the waters from the rivers Narmada, Mahi, Sabarmati, Dhadar and other runoff streams.
+	
+	
+	</center>
+</div>
+</p>
+</div>
+
+
+
+<div class='SubNav' id='forecast' > 
+	<div class='SubNavHeader'>&nbsp; forecast</div><br>
+	<table> <tr onclick="ajhome('circulation.php');"><td height='40'>&nbsp; Circulation forecast</td></tr> 
+			<tr onclick="ajhome('wave.php');"><td height='40'>&nbsp; Wave forecast</td></tr>  
+			<tr onclick="ajhome('wind.php');"><td height='40'>&nbsp; Wind forecast</td></tr>  
+	</table>
+</div>
+
+
+
+<div class='navigation'>
+	
+	<img src='img/home1.jpg' id='show'><br>
+	<img src='img/forecast.jpg'><br>	
+	<img src='img/reports.jpg'><br>
+	<img src='img/projects.jpg'><br>
+	<img src='img/services.jpg'><br>
+	<img src='img/contact.jpg'><br>
+	<img src='img/people.jpg'><br>
+	
+	<div class='nav forecast' onmouseover="NavMOver('forecast');" onmouseout="NavMOut('forecast');" onclick="SubNavUnHide('forecast');" ></div>
+	<div class='nav reports' onmouseover="NavMOver('reports');" onmouseout="NavMOut('reports');" onclick="ajhome('reports.php');" ></div>
+	<div class='nav projects' onmouseover="NavMOver('projects');" onmouseout="NavMOut('projects');" onclick="ajhome('projects.php');" ></div>
+	<div class='nav services' onmouseover="NavMOver('services');" onmouseout="NavMOut('services');" onclick="ajhome('services.php');" ></div>
+	<div class='nav contact' onmouseover="NavMOver('contact');" onmouseout="NavMOut('contact');" onclick="ajhome('contact.php');" ></div>
+	<div class='nav people' onmouseover="NavMOver('people');" onmouseout="NavMOut('people');" onclick="ajhome('people.php');" ></div>
+</div>
+<div id="imgalign">
+		<img src="img/45.gif">
+	</div>
+	
+</div>
+
+	<div class="avgrund-overlay "></div>
+</body>
+
